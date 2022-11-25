@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link, Navigate } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/AuthProvider';
 
-const Product = ({ product }) => {
+
+
+const Product = ({ product, setBookingProduct}) => {
     const { img, name, location, rsPrice, orgPrice, sellerName } = product;
+    const {user} = useContext(AuthContext);
+
+    const p = () =>{
+        console.log("p");
+    }
     return (
         <div className="card w-96 bg-base-100 shadow-xl">
             <figure><img src={img} alt="phone" className='h-56'/></figure>
@@ -12,7 +21,21 @@ const Product = ({ product }) => {
                 <p>Original Price: ${orgPrice}</p>
                 <p>Seller Name: {sellerName}</p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Book Now</button>
+                    
+                {
+                    user?.uid ?
+                    <label 
+                    htmlFor="booking-modal"
+                    className="btn btn-primary"
+                    onClick={()=>setBookingProduct(product)}
+                    >Book Now</label>:
+                    <Link to='/userlogin'> <label 
+                    htmlFor="booking-modal"
+                    className="btn btn-primary"
+                    onClick={()=>setBookingProduct(product)}
+                    >Book Now</label></Link>
+                }
+                    
                 </div>
             </div>
         </div>

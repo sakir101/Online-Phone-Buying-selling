@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Loading from '../../Shared/Loading/Loading';
 import Product from './Product';
+import BookingModal from '../BookingModal/BookingModal';
+import { AuthContext } from '../../Contexts/AuthProvider';
+import { Link } from 'react-router-dom';
+import { Navigate} from 'react-router-dom';
 
 const Products = () => {
-    const { data: availableProducts = [], isLoading } = useQuery({
+    const [bookingProduct, setBookingProduct] = useState(null)
+    const {user} = useContext(AuthContext);
+    const { data: availableProducts = [], refetch, isLoading } = useQuery({
         queryKey: ['availableProducts'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/products');
@@ -24,9 +30,18 @@ const Products = () => {
             </div>
             <div className='grid gap-[34px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto my-7'>
                 {
-                    availableProducts.map(product => <Product key={product._id} product={product}></Product>)
+                    availableProducts.map(product => <Product key={product._id} product={product} setBookingProduct={setBookingProduct}></Product>)
                 }
             </div>
+            {
+                
+               bookingProduct && <BookingModal
+                bookingProduct = {bookingProduct}
+                setBookingProduct={setBookingProduct}
+                refetch={refetch}
+                ></BookingModal> 
+                
+            }
         </div>
 
     );
