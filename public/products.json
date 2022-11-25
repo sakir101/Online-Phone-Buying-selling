@@ -1,0 +1,101 @@
+[
+    {
+        "name": "OPP77",
+        "img": "https://www.mobiledokan.com/wp-content/uploads/2022/04/Oppo-A16e.jpg",
+        "location": "Dhanmondi",
+        "rsPrice": 99,
+        "orgPrice": 150,
+        "yearOfUse": 2,
+        "sellerName": "Rezone",
+        "categoryId": 1,
+        "booked": "none"
+    },
+    {
+        "name": "Samsung6s",
+        "img": "https://m.media-amazon.com/images/I/81MyAtHwf0L._AC_SX425_.jpg",
+        "location": "Uttara",
+        "rsPrice": 100,
+        "orgPrice": 170,
+        "yearOfUse": 2.5,
+        "sellerName": "Kader",
+        "categoryId": 1,
+        "booked": "none"
+    },
+    {
+        "name": "Iphone6",
+        "img": "https://pisces.bbystatic.com/image2/BestBuy_US/dam/SOL-100818-cym-iphone14Plus-c4ba477e-990e-4a0d-90ec-e77684dddee9.jpg",
+        "location": "Gulsan",
+        "rsPrice": 150,
+        "orgPrice": 230,
+        "yearOfUse": 2,
+        "sellerName": "Sabir",
+        "categoryId": 1,
+        "booked": "none"
+    },
+    {
+        "name": "OPP67",
+        "img": "https://www.91-img.com/pictures/132707-v4-oppo-f11-pro-mobile-phone-large-1.jpg",
+        "location": "Dhanmondi",
+        "rsPrice": 70,
+        "orgPrice": 120,
+        "yearOfUse": 4,
+        "sellerName": "Rezone",
+        "categoryId": 2,
+        "booked": "none"
+    },
+    {
+        "name": "Huwai32",
+        "img": "https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/nova_9.jpg",
+        "location": "Mohakhali",
+        "rsPrice": 67,
+        "orgPrice": 110,
+        "yearOfUse": 5,
+        "sellerName": "Jakar",
+        "categoryId": 2,
+        "booked": "none"
+    },
+    {
+        "name": "Samsung7s",
+        "img": "https://images-na.ssl-images-amazon.com/images/I/51hyCkojfKL._AC_.jpg",
+        "location": "Dhanmondi",
+        "rsPrice": 60,
+        "orgPrice": 100,
+        "yearOfUse": 5,
+        "sellerName": "Sulaiman",
+        "categoryId": 2,
+        "booked": "none"
+    },
+    {
+        "name": "Oppo70",
+        "img": "https://www.91-img.com/pictures/140214-v8-oppo-f21-pro-mobile-phone-large-1.jpg",
+        "location": "Hatirjil",
+        "rsPrice": 50,
+        "orgPrice": 80,
+        "yearOfUse": 6,
+        "sellerName": "Rezone",
+        "categoryId": 3,
+        "booked": "none"
+    },
+    {
+        "name": "Huwai9h",
+        "img": "https://www.mobiledokan.co/wp-content/uploads/2022/09/Huawei-Nova-10z-Green-300x300.jpg",
+        "location": "Mohakhali",
+        "rsPrice": 55,
+        "orgPrice": 100,
+        "yearOfUse": 5,
+        "sellerName": "Salem",
+        "categoryId": 3,
+        "booked": "none"
+    },
+    {
+        "name": "Samsung88",
+        "img": "https://m.media-amazon.com/images/I/81MyAtHwf0L._AC_SX425_.jpg",
+        "location": "Dhanmondi",
+        "rsPrice": 60,
+        "orgPrice": 150,
+        "yearOfUse": 7,
+        "sellerName": "Rezone",
+        "categoryId": 3,
+        "booked": "none"
+    }
+]
