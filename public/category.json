@@ -1,0 +1,18 @@
+[
+    {
+        "categoryId": 1,
+        "name": "Excellent",
+        "desc": "This products used in very less time. This quality and condition is so much good. You can easily effort these products."
+    },
+    {
+        "categoryId": 2,
+        "name": "Good",
+        "desc": "This products used in 3 to 5 years. This quality and condition is good. These products budget of range in your effort."
+    },
+    {
+        "categoryId": 3,
+        "name": "Fair",
+        "desc": "This products used long time. This quality and condition is workable. Price of these products is very low."
+    }
+
+]
