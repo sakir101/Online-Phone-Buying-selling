@@ -1,13 +1,46 @@
-import React, { useState } from 'react';
+import { GoogleAuthProvider } from 'firebase/auth';
+import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import toast, { Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Contexts/AuthProvider';
+
+
 
 const UserSignup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const { createUser, signInGoogleHandler} = useContext(AuthContext);
+    const googleProvider = new GoogleAuthProvider();
     const [signUpError, setSignUPError] = useState('');
-    const handleSignUp = (data) =>{
-       
+    
+
+    const handleSignUp = (data) => {
+        setSignUPError('');
+        createUser(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                toast('Buyer Created Successfully.')
+                
+            })
+            .catch(error => {
+                console.log(error)
+                setSignUPError(error.message)
+            });
     }
+
+    const googleSignIn = () => {
+        signInGoogleHandler(googleProvider)
+            .then(result => {
+                const users = result.user;
+                console.log(users)
+            })
+            .catch(error => {
+                console.log('error:', error)
+                setSignUPError(error.message)
+            })
+    }
+
     return (
         <div className='h-[800px] flex justify-center items-center'>
             <div className='w-96 p-7'>
@@ -41,8 +74,8 @@ const UserSignup = () => {
                 </form>
                 <p>Already have an account <Link className='text-secondary' to="/userlogin">Please Login</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
-
+                <button className='btn btn-outline w-full' onClick={googleSignIn}>CONTINUE WITH GOOGLE</button>
+                <Toaster />
             </div>
         </div>
     );

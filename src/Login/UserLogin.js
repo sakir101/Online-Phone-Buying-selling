@@ -1,12 +1,39 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Contexts/AuthProvider';
+import toast, { Toaster } from 'react-hot-toast';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const UserLogin = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const { signIn, signInGoogleHandler } = useContext(AuthContext);
+    const googleProvider = new GoogleAuthProvider();
     const [loginError, setLoginError] = useState('');
-    const handleLogin = (data) =>{
+    const handleLogin = (data) => {
+        setLoginError('');
+        signIn(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                toast('Buyer Created Successfully.')
+            })
+            .catch(error => {
+                console.log(error.message)
+                setLoginError(error.message);
+            });
+    }
 
+    const googleSignIn = () => {
+        signInGoogleHandler(googleProvider)
+            .then(result => {
+                const users = result.user;
+                console.log(users)
+            })
+            .catch(error => {
+                console.log('error:', error)
+                setLoginError(error.message);
+            })
     }
 
     return (
@@ -31,10 +58,10 @@ const UserLogin = () => {
                                 minLength: { value: 6, message: 'Password must be 6 characters or longer' }
                             })}
                             className="input input-bordered w-full max-w-xs" />
-                        <label className="label"> <span className="label-text">Forget Password?</span></label>
+                        
                         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
                     </div>
-                    <input className='btn btn-accent w-full' value="Login" type="submit" />
+                    <input className='btn btn-accent w-full my-4' value="Login" type="submit" />
                     <div>
                         {loginError && <p className='text-red-600'>{loginError}</p>}
                     </div>
@@ -42,7 +69,8 @@ const UserLogin = () => {
                 <p>New to Mobile Hunter <Link className='text-secondary' to="/usersignup">Create new Account as Buyer</Link></p>
                 <p>New to Mobile Hunter <Link className='text-secondary' to="/sellersignup">Create new Account as Seller</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button className='btn btn-outline w-full' onClick={googleSignIn}>CONTINUE WITH GOOGLE</button>
+                <Toaster />
             </div>
         </div>
     );
