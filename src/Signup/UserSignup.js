@@ -9,10 +9,11 @@ import { AuthContext } from '../Contexts/AuthProvider';
 
 const UserSignup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser, signInGoogleHandler} = useContext(AuthContext);
+    const { createUser, signInGoogleHandler, updateUser } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
+    const [createdUserEmail, setCreatedUserEmail] = useState('')
     const [signUpError, setSignUPError] = useState('');
-    
+
 
     const handleSignUp = (data) => {
         setSignUPError('');
@@ -20,8 +21,16 @@ const UserSignup = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                toast('Buyer Created Successfully.')
-                
+                toast('Buyer Created Successfully.');
+                const userInfo = {
+                    displayName: data.name
+                }
+                updateUser(userInfo)
+                    .then(() => {
+                        saveUser(data.name, data.email);
+                    })
+                    .catch(err => console.log(err));
+
             })
             .catch(error => {
                 console.log(error)
@@ -29,11 +38,32 @@ const UserSignup = () => {
             });
     }
 
+    const saveUser = (name, email) =>{
+        const user ={
+            name, 
+            email,
+            role: 'buyer'
+        };
+        fetch('http://localhost:5000/mobileusers', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data =>{
+            console.log(data)
+            setCreatedUserEmail(email);
+        })
+    }
+
     const googleSignIn = () => {
         signInGoogleHandler(googleProvider)
             .then(result => {
                 const users = result.user;
-                console.log(users)
+                saveUser(users.displayName, users.email);
+                console.log(users.displayName)
             })
             .catch(error => {
                 console.log('error:', error)

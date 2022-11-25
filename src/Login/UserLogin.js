@@ -3,12 +3,11 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
 import toast, { Toaster } from 'react-hot-toast';
-import { GoogleAuthProvider } from 'firebase/auth';
+
 
 const UserLogin = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const { signIn, signInGoogleHandler } = useContext(AuthContext);
-    const googleProvider = new GoogleAuthProvider();
+    const { signIn } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
     const handleLogin = (data) => {
         setLoginError('');
@@ -24,17 +23,7 @@ const UserLogin = () => {
             });
     }
 
-    const googleSignIn = () => {
-        signInGoogleHandler(googleProvider)
-            .then(result => {
-                const users = result.user;
-                console.log(users)
-            })
-            .catch(error => {
-                console.log('error:', error)
-                setLoginError(error.message);
-            })
-    }
+    
 
     return (
         <div className='h-[800px] flex justify-center items-center'>
@@ -68,8 +57,7 @@ const UserLogin = () => {
                 </form>
                 <p>New to Mobile Hunter <Link className='text-secondary' to="/usersignup">Create new Account as Buyer</Link></p>
                 <p>New to Mobile Hunter <Link className='text-secondary' to="/sellersignup">Create new Account as Seller</Link></p>
-                <div className="divider">OR</div>
-                <button className='btn btn-outline w-full' onClick={googleSignIn}>CONTINUE WITH GOOGLE</button>
+                
                 <Toaster />
             </div>
         </div>

@@ -1,5 +1,5 @@
 import { GoogleAuthProvider } from 'firebase/auth';
-import React,{useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
@@ -8,17 +8,26 @@ import { AuthContext } from '../Contexts/AuthProvider';
 const SellerSignup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [signUpError, setSignUPError] = useState('');
-    const { createUser, signInGoogleHandler} = useContext(AuthContext);
+    const { createUser, signInGoogleHandler, updateUser } = useContext(AuthContext);
+    const [createdUserEmail, setCreatedUserEmail] = useState('')
     const googleProvider = new GoogleAuthProvider();
 
-    const handleSignUp = (data) =>{
-       setSignUPError('');
+    const handleSignUp = (data) => {
+        setSignUPError('');
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
                 toast('Seller Created Successfully.')
-                
+                const userInfo = {
+                    displayName: data.name
+                }
+                updateUser(userInfo)
+                    .then(() => {
+                        saveUser(data.name, data.email);
+                    })
+                    .catch(err => console.log(err));
+
             })
             .catch(error => {
                 console.log(error)
@@ -26,11 +35,32 @@ const SellerSignup = () => {
             });
     }
 
-    
+    const saveUser = (name, email) =>{
+        const user ={
+            name, 
+            email,
+            role: 'seller'
+        };
+        fetch('http://localhost:5000/mobileusers', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data =>{
+            console.log(data)
+            setCreatedUserEmail(email);
+        })
+    }
+
+
     const googleSignIn = () => {
         signInGoogleHandler(googleProvider)
             .then(result => {
                 const users = result.user;
+                saveUser(users.displayName, users.email);
                 console.log(users)
             })
             .catch(error => {

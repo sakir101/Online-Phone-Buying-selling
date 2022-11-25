@@ -19,6 +19,10 @@ const AuthProvider = ({ children }) => {
     const signIn = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
+    };
+
+    const updateUser = (userInfo) =>{
+        return updateProfile(user, userInfo);
     }
 
 
@@ -26,6 +30,11 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         return signInWithPopup(auth, googleProvider)
 
+    }
+
+    const logOut = () =>{
+        setLoading(true);
+        return signOut(auth);
     }
 
     useEffect(() => {
@@ -43,6 +52,8 @@ const AuthProvider = ({ children }) => {
         createUser,
         signIn,
         signInGoogleHandler,
+        updateUser,
+        logOut,
         loading
     }
     return (
