@@ -25,8 +25,8 @@ const Navbar = () => {
                                 <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
                             </Link>
                             <ul className="p-2 bg-blue-400">
-                                <li><Link>Buyer Signup</Link></li>
-                                <li><Link>Seller Signup</Link></li>
+                                <li><Link to='/usersignup'>Buyer Signup</Link></li>
+                                <li><Link to='/sellersignup'>Seller Signup</Link></li>
                             </ul>
                         </li>
                     </ul>
@@ -41,9 +41,9 @@ const Navbar = () => {
                             Signup
                             <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
                         </Link>
-                        <ul className="p-2 ">
-                            <li><Link>Buyer Signup</Link></li>
-                            <li><Link>Seller Signup</Link></li>
+                        <ul className="p-2 bg-blue-400">
+                            <li><Link to='/usersignup'>Buyer Signup</Link></li>
+                            <li><Link to='/sellersignup'>Seller Signup</Link></li>
                         </ul>
                     </li>
                 </ul>

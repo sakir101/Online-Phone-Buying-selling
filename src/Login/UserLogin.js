@@ -40,7 +40,7 @@ const UserLogin = () => {
                     </div>
                 </form>
                 <p>New to Mobile Hunter <Link className='text-secondary' to="/usersignup">Create new Account as Buyer</Link></p>
-                <p>New to Mobile Hunter <Link className='text-secondary' to="/usersignup">Create new Account as Seller</Link></p>
+                <p>New to Mobile Hunter <Link className='text-secondary' to="/sellersignup">Create new Account as Seller</Link></p>
                 <div className="divider">OR</div>
                 <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
