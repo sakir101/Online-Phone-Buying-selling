@@ -33,7 +33,7 @@ const AllProducts = () => {
             </div>
             <div className='grid gap-[34px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto my-7'>
                 {
-                    products.length &&
+                    products?.length &&
                     products.map(product => <AllProduct key={product._id} product={product}></AllProduct>)
                 }
 
