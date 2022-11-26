@@ -15,6 +15,7 @@ const BookingModal = ({ bookingProduct, setBookingProduct, refetch }) => {
         const meet = form.meetingLocation.value;
         const booking = {
             itemName: name,
+            productId: _id,
             buyerName: username,
             buyerEmail: email,
             productPrice: price,

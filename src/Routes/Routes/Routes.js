@@ -4,6 +4,7 @@ import Home from "../../Home/Home/Home";
 import Main from "../../Layout/Main";
 import UserLogin from "../../Login/UserLogin";
 import Orders from "../../Pages/Orders/Orders";
+import Payment from "../../Pages/Payment/Payment";
 import SellerSignup from "../../Signup/SellerSignup";
 import UserSignup from "../../Signup/UserSignup";
 
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
             {
                 path: '/orders',
                 element: <Orders></Orders>
+            },
+            {
+                path: '/payment/:id',
+                element: <Payment></Payment>,
+                loader: ({params}) => fetch(`http://localhost:5000/payment/${params.id}`)
             }
         ]
     }
