@@ -2,17 +2,19 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import Loading from '../../Shared/Loading/Loading';
+import BookingModal from '../BookingModal/BookingModal';
 import AllProduct from './AllProduct';
 
 
 const AllProducts = () => {
+    const [bookingProduct, setBookingProduct] = useState(null)
     const { name, categoryId } = useLoaderData();
     const [products, setProducts] = useState([]);
 
-    const { data: availableProducts = [], isLoading } = useQuery({
+    const { data: availableProducts = [], refetch, isLoading } = useQuery({
         queryKey: ['availableProducts'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/allproducts');
+            const res = await fetch('http://localhost:5000/products');
             const data = await res.json();
             const p = data.filter(x => x.categoryId === categoryId)
             setProducts(p)
@@ -34,10 +36,19 @@ const AllProducts = () => {
             <div className='grid gap-[34px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto my-7'>
                 {
                     products?.length &&
-                    products.map(product => <AllProduct key={product._id} product={product}></AllProduct>)
+                    products.map(product => <AllProduct key={product._id} product={product} setBookingProduct={setBookingProduct}></AllProduct>)
                 }
 
             </div>
+            {
+                
+                bookingProduct && <BookingModal
+                 bookingProduct = {bookingProduct}
+                 setBookingProduct={setBookingProduct}
+                 refetch={refetch}
+                 ></BookingModal> 
+                 
+             }
         </div>
 
     );

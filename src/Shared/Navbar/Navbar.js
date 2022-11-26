@@ -18,6 +18,7 @@ const Navbar = () => {
         {
             user?.uid ?
                 <>
+                    <li><Link to='/orders'>My Orders</Link></li>
                     <li><button onClick={handleLogOut}>Sign Out</button></li>
 
                 </> :

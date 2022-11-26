@@ -8,9 +8,7 @@ const Product = ({ product, setBookingProduct}) => {
     const { img, name, location, rsPrice, orgPrice, sellerName } = product;
     const {user} = useContext(AuthContext);
 
-    const p = () =>{
-        console.log("p");
-    }
+   
     return (
         <div className="card w-96 bg-base-100 shadow-xl">
             <figure><img src={img} alt="phone" className='h-56'/></figure>

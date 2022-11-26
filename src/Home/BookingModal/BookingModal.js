@@ -8,17 +8,19 @@ const BookingModal = ({ bookingProduct, setBookingProduct, refetch }) => {
     const handleBooking = event => {
         event.preventDefault();
         const form = event.target;
-        const name = form.name.value;
+        const username = form.name.value;
         const email = form.email.value;
         const price = form.price.value;
         const phnNumber = form.phone.value;
         const meet = form.meetingLocation.value;
         const booking = {
-            buyerName: name,
+            itemName: name,
+            buyerName: username,
             buyerEmail: email,
             productPrice: price,
             phoneNumber: phnNumber,
-            meet
+            meet,
+            image: img
         }
         fetch('http://localhost:5000/bookingphone', {
             method: 'POST',
@@ -33,7 +35,7 @@ const BookingModal = ({ bookingProduct, setBookingProduct, refetch }) => {
                 if (data.acknowledged) {
                     setBookingProduct(null);
                     toast.success('Booking confirmed');
-                    updateProduct()
+                    refetch();
                 }
                 else {
                     toast.error(data.message);
@@ -41,18 +43,7 @@ const BookingModal = ({ bookingProduct, setBookingProduct, refetch }) => {
             })
     }
 
-    const updateProduct = () => {
-        fetch(`http://localhost:5000/products/${_id}`, {
-            method: 'PUT',
-            
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount > 0) {
-                    refetch();
-                }
-            })
-    }
+    
 
     return (
         <div>
