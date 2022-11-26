@@ -1,8 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../../Contexts/AuthProvider';
+import toast, { Toaster } from 'react-hot-toast';
 
 const AddProducts = () => {
     const {user} = useContext(AuthContext);
+    const [username, setUsername] = useState('')
+
+    useEffect(()=>{
+        fetch(`http://localhost:5000/alluser/${user?.email}`)
+        .then(res=> res.json())
+        .then(data=> setUsername(data.name))
+    },[user?.email])
+
     const handlePlaceService = event => {
         event.preventDefault();
         const form = event.target;
@@ -16,6 +25,40 @@ const AddProducts = () => {
         const purchaseyear = form.purchaseyear.value;
         const email = form.email.value;
         const desc = form.desc.value;
+        const location = form.location.value;
+        const useYear = form.useyear.value;
+        
+        const product = {
+            name: productName,
+            img,
+            location,
+            rsPrice,
+            orgPrice,
+            yearOfUse : useYear,
+            sellerName: username,
+            catagoryId: category,
+            payment: 'none',
+            phoneNumber,
+            condition,
+            purchaseyear,
+            sellerEmail: email,
+            desc
+        }
+        fetch('http://localhost:5000/addproduct', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(product)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast('Product successfully placed');
+                }
+                form.reset();
+            })
+            .catch(err => console.error(err));
     }
     return (
         <form className='w-full text-center p-10' onSubmit={handlePlaceService}>
@@ -53,12 +96,14 @@ const AddProducts = () => {
 
                 </select></label>
                 <input type="text" name='purchaseyear' placeholder="Year of Purchase" className="input input-bordered input-primary w-full" required />
+                <input type="text" name='useyear' placeholder="Year of Use" className="input input-bordered input-primary w-full" required />
                 <input type="text" name='email' placeholder="User Email" defaultValue={user?.email} className="input input-bordered input-primary w-full" disabled/>
+                <input type="text" name='name' placeholder="User Name" defaultValue={username} className="input input-bordered input-primary w-full" disabled/>
 
             </div>
             <textarea name='desc' placeholder="Product desc" className="textarea textarea-info h-24 w-full" required></textarea>
             <button className='btn btn-info my-5'>Submit</button>
-
+            <Toaster />
         </form>
     );
 };
