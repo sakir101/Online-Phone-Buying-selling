@@ -1,8 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import AllProducts from "../../Home/Category/AllProducts";
 import Home from "../../Home/Home/Home";
+import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import UserLogin from "../../Login/UserLogin";
+import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+import AddProducts from "../../Pages/Dashboard/SellerDashboard/AddProducts/AddProducts";
 import Orders from "../../Pages/Orders/Orders";
 import Payment from "../../Pages/Payment/Payment";
 import SellerSignup from "../../Signup/SellerSignup";
@@ -42,6 +45,20 @@ const router = createBrowserRouter([
                 path: '/payment/:id',
                 element: <Payment></Payment>,
                 loader: ({params}) => fetch(`http://localhost:5000/payment/${params.id}`)
+            }
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <DashboardLayout></DashboardLayout>,
+        children: [
+            {
+                path: '/dashboard',
+                element: <Dashboard></Dashboard>
+            },
+            {
+                path: '/dashboard/addproducts',
+                element: <AddProducts></AddProducts>
             }
         ]
     }
