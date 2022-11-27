@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import toast, { Toaster } from 'react-hot-toast';
 
-const BookingModal = ({ bookingProduct, setBookingProduct, refetch }) => {
+const BookingModal = ({ bookingProduct, setBookingProduct}) => {
     const { _id, img, name, location, rsPrice, orgPrice, sellerName } = bookingProduct;
     const { user } = useContext(AuthContext);
     const handleBooking = event => {
@@ -36,7 +36,7 @@ const BookingModal = ({ bookingProduct, setBookingProduct, refetch }) => {
                 if (data.acknowledged) {
                     setBookingProduct(null);
                     toast.success('Booking confirmed');
-                    refetch();
+                    
                 }
                 else {
                     toast.error(data.message);

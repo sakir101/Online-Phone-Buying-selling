@@ -2,8 +2,9 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
+import useToken from '../hooks/useToken';
 
 
 
@@ -13,7 +14,12 @@ const UserSignup = () => {
     const googleProvider = new GoogleAuthProvider();
     const [createdUserEmail, setCreatedUserEmail] = useState('')
     const [signUpError, setSignUPError] = useState('');
+    const [token] = useToken(createdUserEmail);
+    const navigate = useNavigate();
 
+    if(token){
+        navigate('/');
+    }
 
     const handleSignUp = (data) => {
         setSignUPError('');
@@ -38,6 +44,7 @@ const UserSignup = () => {
             email,
             role: 'buyer'
         };
+
         fetch('http://localhost:5000/mobileusers', {
             method: 'POST',
             headers: {

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import toast, { Toaster } from 'react-hot-toast';
 
-const ReportModal = ({ reportProduct, setReportProduct, refetch }) => {
+const ReportModal = ({ reportProduct, setReportProduct }) => {
     const { _id, img, name, location, rsPrice, orgPrice, sellerName } = reportProduct;
     const { user } = useContext(AuthContext);
     const [username, setUsername] = useState('')
@@ -39,7 +39,7 @@ const ReportModal = ({ reportProduct, setReportProduct, refetch }) => {
                 if (data.acknowledged) {
                     setReportProduct(null);
                     toast.success('Report confirmed');
-                    refetch();
+                   
                 }
                 else {
                     toast.error(data.message);

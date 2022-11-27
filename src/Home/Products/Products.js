@@ -5,25 +5,28 @@ import Product from './Product';
 import BookingModal from '../BookingModal/BookingModal';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import { Link } from 'react-router-dom';
-import { Navigate} from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import ReportModal from '../ReportModal/ReportModal';
+import axios from 'axios'
 
 const Products = () => {
     const [bookingProduct, setBookingProduct] = useState(null)
     const [reportProduct, setReportProduct] = useState(null)
-    const {user} = useContext(AuthContext);
-    const { data: availableProducts = [], refetch, isLoading } = useQuery({
-        queryKey: ['availableProducts'],
-        queryFn: async () => {
-            const res = await fetch('http://localhost:5000/products');
-            const data = await res.json();
-            return data
-        }
-    });
+    const [availableProducts, setAvailableProducts] = useState([])
+    const { user } = useContext(AuthContext);
 
-    if (isLoading) {
-        return <Loading></Loading>
-    }
+    axios.get('http://localhost:5000/advertiseProduct')
+        .then(res => {
+            console.log(res.data);
+            setAvailableProducts(res.data)
+        })
+        .catch((error)=> {
+            console.log(error);
+        })
+        .finally(()=> {
+           
+        });
+
     return (
         <div>
             <div className='mt-16 text-center'>
@@ -32,26 +35,26 @@ const Products = () => {
             </div>
             <div className='grid gap-[34px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto my-7'>
                 {
-                    availableProducts.map(product => <Product key={product._id} product={product} setBookingProduct={setBookingProduct} setReportProduct={setReportProduct}></Product>)
+                    availableProducts.length?
+                    availableProducts.map(product => <Product key={product._id} product={product} setBookingProduct={setBookingProduct} setReportProduct={setReportProduct}></Product>):
+                    <p className='text-red-600 font-bold text-center text-2xl'>No Advertise Product to show</p>
                 }
             </div>
             {
-                
-               bookingProduct && <BookingModal
-                bookingProduct = {bookingProduct}
-                setBookingProduct={setBookingProduct}
-                refetch={refetch}
-                ></BookingModal> 
-                
+
+                bookingProduct && <BookingModal
+                    bookingProduct={bookingProduct}
+                    setBookingProduct={setBookingProduct}
+                ></BookingModal>
+
             }
-             {
+            {
                 reportProduct &&
                 <ReportModal
                     reportProduct={reportProduct}
                     setReportProduct={setReportProduct}
-                    refetch={refetch}
                 ></ReportModal>
-             }
+            }
         </div>
 
     );

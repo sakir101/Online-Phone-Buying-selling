@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AuthContext } from '../../../../Contexts/AuthProvider';
 import toast, { Toaster } from 'react-hot-toast';
 import Loading from '../../../../Shared/Loading/Loading';
@@ -25,6 +25,7 @@ const SellerProducts = () => {
                 .then(data => {
                     if (data.deletedCount > 0) {
                         toast('Delete Product Successfully');
+                        deleteAdvertise(id);
                         refetch()
                     }
 
@@ -33,7 +34,64 @@ const SellerProducts = () => {
         }
     }
 
-    if(isLoading){
+    const handleAdvertise = (product, id) => {
+        const advertiseItem = {
+            productID: id,
+            name: product.name,
+            img: product.img,
+            location: product.location,
+            rsPrice: product.rsPrice,
+            orgPrice: product.orgPrice,
+            yearOfUse: product.yearOfUse,
+            sellerName: product.sellerName,
+            categoryId: product.categoryId,
+            payment: product.payment,
+            phoneNumber: product.phoneNumber,
+            condition: product.condition,
+            purchaseyear: product.purchaseyear,
+            sellerEmail: product.sellerEmail,
+            desc: product.desc
+        }
+
+        fetch(`http://localhost:5000/addadvertise/${id}`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(advertiseItem)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast('Product successfully advertised');
+                    refetch()
+                }
+                
+            })
+            .catch(err => console.error(err));
+    }
+
+    const deleteAdvertise=(id)=>{
+        const proceed = true
+        console.log(id);
+        if (proceed) {
+            fetch(`http://localhost:5000/deleteadvertise/${id}`, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        refetch()
+                    }
+
+                })
+
+        }
+    }
+
+   
+
+    if (isLoading) {
         return <Loading></Loading>
     }
     return (
@@ -60,8 +118,12 @@ const SellerProducts = () => {
                                 <td>{product.payment}</td>
                                 <button className='btn btn-sm bg-red-600 my-3' onClick={() => handleDelete(product._id)}>Delete</button>
                                 {
-                                    product.payment==='none'&& <button className='btn btn-sm bg-red-600 my-3 mx-3'>Advertise</button>
+                                    product?.advertise ?
+                                    <span className='mx-3 my-3 text-blue-500'>Advertised</span>
+                                     :<button className='btn btn-sm bg-red-600 my-3 mx-3' onClick={() => handleAdvertise(product, product._id)}>Advertise</button>
                                 }
+                               
+
                             </tr>)
                         }
 
