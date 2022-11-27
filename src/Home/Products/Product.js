@@ -5,7 +5,7 @@ import { FaCheck, FaTimes } from "react-icons/fa";
 
 
 
-const Product = ({ product, setBookingProduct }) => {
+const Product = ({ product, setBookingProduct, setReportProduct }) => {
     const { img, name, location, rsPrice, orgPrice, sellerName } = product;
     const { user } = useContext(AuthContext);
     const [verify, setVerify] = useState('');
@@ -13,7 +13,7 @@ const Product = ({ product, setBookingProduct }) => {
     useEffect(() => {
         fetch(`http://localhost:5000/checkverify/${product?.sellerEmail}`)
             .then(res => res.json())
-            .then(data => data.verify ==='verified'? setVerify(data.verify): setVerify(''))
+            .then(data => data.verify === 'verified' ? setVerify(data.verify) : setVerify(''))
     }, [product?.sellerEmail])
 
     return (
@@ -51,6 +51,19 @@ const Product = ({ product, setBookingProduct }) => {
                                 className="btn btn-primary"
                                 onClick={() => setBookingProduct(product)}
                             >Book Now</label></Link>
+                    }
+                    {
+                        user?.uid ?
+                            <label
+                                htmlFor="report-modal"
+                                className="btn bg-red-700"
+                                onClick={() => setReportProduct(product)}
+                            >Report</label> :
+                            <Link to='/userlogin'><label
+                            htmlFor="report-modal"
+                            className="btn bg-red-700"
+                            onClick={() => setReportProduct(product)}
+                        >Report</label></Link>
                     }
 
                 </div>

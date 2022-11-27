@@ -1,14 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { FaCheck, FaTimes } from "react-icons/fa";
-const AllProduct = ({ product, setBookingProduct }) => {
+
+
+
+const AllProduct = ({ product, setBookingProduct, setReportProduct }) => {
     const { img, name, location, rsPrice, orgPrice, sellerName } = product;
     const [verify, setVerify] = useState('');
 
     useEffect(() => {
         fetch(`http://localhost:5000/checkverify/${product?.sellerEmail}`)
             .then(res => res.json())
-            .then(data => data.verify ==='verified'? setVerify(data.verify): setVerify(''))
+            .then(data => data.verify === 'verified' ? setVerify(data.verify) : setVerify(''))
     }, [product?.sellerEmail])
 
 
@@ -22,7 +25,7 @@ const AllProduct = ({ product, setBookingProduct }) => {
                     </div>
                     <div className='bg-blue-300 rounded p-2'>
                         {
-                            verify? <FaCheck/> : <FaTimes/>
+                            verify ? <FaCheck /> : <FaTimes />
                         }
                     </div>
 
@@ -37,6 +40,12 @@ const AllProduct = ({ product, setBookingProduct }) => {
                         className="btn btn-primary"
                         onClick={() => setBookingProduct(product)}
                     >Book Now</label>
+
+                    <label
+                        htmlFor="report-modal"
+                        className="btn bg-red-700"
+                        onClick={()=>setReportProduct(product)}
+                    >Report</label>
                 </div>
             </div>
         </div>

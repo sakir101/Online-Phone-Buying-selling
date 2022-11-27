@@ -6,9 +6,11 @@ import BookingModal from '../BookingModal/BookingModal';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import { Link } from 'react-router-dom';
 import { Navigate} from 'react-router-dom';
+import ReportModal from '../ReportModal/ReportModal';
 
 const Products = () => {
     const [bookingProduct, setBookingProduct] = useState(null)
+    const [reportProduct, setReportProduct] = useState(null)
     const {user} = useContext(AuthContext);
     const { data: availableProducts = [], refetch, isLoading } = useQuery({
         queryKey: ['availableProducts'],
@@ -30,7 +32,7 @@ const Products = () => {
             </div>
             <div className='grid gap-[34px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto my-7'>
                 {
-                    availableProducts.map(product => <Product key={product._id} product={product} setBookingProduct={setBookingProduct}></Product>)
+                    availableProducts.map(product => <Product key={product._id} product={product} setBookingProduct={setBookingProduct} setReportProduct={setReportProduct}></Product>)
                 }
             </div>
             {
@@ -42,6 +44,14 @@ const Products = () => {
                 ></BookingModal> 
                 
             }
+             {
+                reportProduct &&
+                <ReportModal
+                    reportProduct={reportProduct}
+                    setReportProduct={setReportProduct}
+                    refetch={refetch}
+                ></ReportModal>
+             }
         </div>
 
     );

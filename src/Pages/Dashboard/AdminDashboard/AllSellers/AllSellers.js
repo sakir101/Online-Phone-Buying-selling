@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import Loading from '../../../../Shared/Loading/Loading';
 
 const AllSellers = () => {
     const { data: sellers = [], refetch, isLoading } = useQuery({
@@ -35,6 +36,10 @@ const AllSellers = () => {
             }
         })
         .catch(err => console.log(err))
+    }
+
+    if(isLoading){
+        return <Loading></Loading>
     }
 
     const handleDelete = id => {
