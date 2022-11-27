@@ -15,7 +15,7 @@ const UserLogin = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                toast('Buyer Created Successfully.')
+                toast('Login Successfully.')
             })
             .catch(error => {
                 console.log(error.message)

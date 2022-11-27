@@ -22,14 +22,8 @@ const UserSignup = () => {
                 const user = result.user;
                 console.log(user);
                 toast('Buyer Created Successfully.');
-                const userInfo = {
-                    displayName: data.name
-                }
-                updateUser(userInfo)
-                    .then(() => {
+                
                         saveUser(data.name, data.email);
-                    })
-                    .catch(err => console.log(err));
 
             })
             .catch(error => {

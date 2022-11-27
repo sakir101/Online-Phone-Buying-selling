@@ -19,15 +19,8 @@ const SellerSignup = () => {
                 const user = result.user;
                 console.log(user);
                 toast('Seller Created Successfully.')
-                const userInfo = {
-                    displayName: data.name
-                }
-                updateUser(userInfo)
-                    .then(() => {
-                        saveUser(data.name, data.email);
-                    })
-                    .catch(err => console.log(err));
-
+                
+                        saveUser(data.name, data.email);  
             })
             .catch(error => {
                 console.log(error)
@@ -39,7 +32,8 @@ const SellerSignup = () => {
         const user ={
             name, 
             email,
-            role: 'seller'
+            role: 'seller',
+            verify: 'none'
         };
         fetch('http://localhost:5000/mobileusers', {
             method: 'POST',

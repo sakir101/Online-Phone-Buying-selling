@@ -4,7 +4,7 @@ import { AuthContext } from '../../../../Contexts/AuthProvider';
 import toast, { Toaster } from 'react-hot-toast';
 import Loading from '../../../../Shared/Loading/Loading';
 
-const AllProducts = () => {
+const SellerProducts = () => {
     const { user } = useContext(AuthContext);
     const { data: products = [], refetch, isLoading } = useQuery({
         queryKey: ['products'],
@@ -73,4 +73,4 @@ const AllProducts = () => {
     );
 };
 
-export default AllProducts;
+export default SellerProducts;

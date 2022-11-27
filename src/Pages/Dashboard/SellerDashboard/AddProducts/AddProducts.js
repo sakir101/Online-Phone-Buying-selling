@@ -36,7 +36,7 @@ const AddProducts = () => {
             orgPrice,
             yearOfUse : useYear,
             sellerName: username,
-            catagoryId: category,
+            categoryId: parseInt(category),
             payment: 'none',
             phoneNumber,
             condition,
