@@ -15,7 +15,7 @@ const Orders = () => {
             .then(data => setOrders(data))
     }, [user])
     return (
-        <div className='w-full'>
+        <div className='w-full my-20'>
         {
             orders?.length? 
             orders.map(order => <Order key={order._id} order={order}></Order>):

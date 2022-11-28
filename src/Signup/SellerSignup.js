@@ -9,9 +9,8 @@ import useToken from '../hooks/useToken';
 const SellerSignup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [signUpError, setSignUPError] = useState('');
-    const { createUser, signInGoogleHandler, updateUser } = useContext(AuthContext);
+    const { createUser} = useContext(AuthContext);
     const [createdUserEmail, setCreatedUserEmail] = useState('')
-    const googleProvider = new GoogleAuthProvider();
     const [token] = useToken(createdUserEmail);
     const navigate = useNavigate();
 
@@ -57,18 +56,6 @@ const SellerSignup = () => {
     }
 
 
-    const googleSignIn = () => {
-        signInGoogleHandler(googleProvider)
-            .then(result => {
-                const users = result.user;
-                saveUser(users.displayName, users.email);
-                console.log(users)
-            })
-            .catch(error => {
-                console.log('error:', error)
-                setSignUPError(error.message)
-            })
-    }
 
     return (
         <div className='h-[800px] flex justify-center items-center'>
@@ -102,8 +89,7 @@ const SellerSignup = () => {
                     {signUpError && <p className='text-red-600'>{signUpError}</p>}
                 </form>
                 <p>Already have an account <Link className='text-secondary' to="/userlogin">Please Login</Link></p>
-                <div className="divider">OR</div>
-                <button className='btn btn-outline w-full' onClick={googleSignIn}>CONTINUE WITH GOOGLE</button>
+               
                 <Toaster />
             </div>
         </div>

@@ -21,6 +21,7 @@ import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
 import routebg from '../../Asset/404routebg.png'
+import Blog from "../../Pages/Blog/Blog";
 
 const router = createBrowserRouter([
     {
@@ -48,10 +49,7 @@ const router = createBrowserRouter([
                 path: '/sellersignup',
                 element: <SellerSignup></SellerSignup>
             },
-            {
-                path: '/orders',
-                element: <PrivateRoute><Orders></Orders></PrivateRoute>
-            },
+           
             {
                 path: '/payment/:id',
                 element: <Payment></Payment>,
@@ -60,6 +58,10 @@ const router = createBrowserRouter([
             {
                 path: '/fa',
                 element: <div>404 Page Not Found! About is unable to reach</div>
+            },
+            {
+                path: '/blog',
+                element: <Blog></Blog>
             }
         ]
     },
@@ -90,6 +92,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/allreport',
                 element: <AdminRoute><AllReport></AllReport></AdminRoute>
+            },
+            {
+                path: '/dashboard/orders',
+                element: <PrivateRoute><Orders></Orders></PrivateRoute>
             },
             
         ]
