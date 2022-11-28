@@ -5,7 +5,7 @@ const Order = ({ order }) => {
     const {_id, productId, productPrice, itemName, image } = order;
     const [orderProduct, setOrderProduct] = useState({})
     useEffect(()=>{
-        fetch(`http://localhost:5000/orderProduct/${productId}`)
+        fetch(`https://assignment-12-server-silk.vercel.app/orderProduct/${productId}`)
         .then(res=>res.json())
         .then(data=> setOrderProduct(data))
     },[productId])

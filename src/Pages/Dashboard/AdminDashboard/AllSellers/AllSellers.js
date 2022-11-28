@@ -7,7 +7,7 @@ const AllSellers = () => {
     const { data: sellers = [], refetch, isLoading } = useQuery({
         queryKey: ['sellers'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/allsellers',{
+            const res = await fetch('https://assignment-12-server-silk.vercel.app/allsellers',{
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}` 
                  }
@@ -23,7 +23,7 @@ const AllSellers = () => {
             verify: 'verified'
         }
 
-        fetch(`http://localhost:5000/sellerverify/${email}`,{
+        fetch(`https://assignment-12-server-silk.vercel.app/sellerverify/${email}`,{
             method: 'PATCH',
             headers:{
                 'content-type': 'application/json',
@@ -49,7 +49,7 @@ const AllSellers = () => {
     const handleDelete = id => {
         const proceed = window.confirm(`Are you sure you want to delete`)
         if (proceed) {
-            fetch(`http://localhost:5000/deleteuser/${id}`, {
+            fetch(`https://assignment-12-server-silk.vercel.app/deleteuser/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

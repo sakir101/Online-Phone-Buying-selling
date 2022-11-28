@@ -8,7 +8,7 @@ const ReportModal = ({ reportProduct, setReportProduct }) => {
     const [username, setUsername] = useState('')
 
     useEffect(()=>{
-        fetch(`http://localhost:5000/alluser/${user?.email}`)
+        fetch(`https://assignment-12-server-silk.vercel.app/alluser/${user?.email}`)
         .then(res=> res.json())
         .then(data=> setUsername(data.name))
     },[user?.email])
@@ -26,7 +26,7 @@ const ReportModal = ({ reportProduct, setReportProduct }) => {
             buyerEmail: email,
             desc
         }
-        fetch('http://localhost:5000/reportingphone', {
+        fetch('https://assignment-12-server-silk.vercel.app/reportingphone', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

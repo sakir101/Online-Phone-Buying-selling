@@ -9,7 +9,7 @@ const SellerProducts = () => {
     const { data: products = [], refetch, isLoading } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/allproducts/${user?.email}`,{
+            const res = await fetch(`https://assignment-12-server-silk.vercel.app/allproducts/${user?.email}`,{
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}` 
                  }
@@ -22,7 +22,7 @@ const SellerProducts = () => {
     const handleDelete = id => {
         const proceed = window.confirm(`Are you sure you want to delete`)
         if (proceed) {
-            fetch(`http://localhost:5000/deleteproduct/${id}`, {
+            fetch(`https://assignment-12-server-silk.vercel.app/deleteproduct/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -57,7 +57,7 @@ const SellerProducts = () => {
             desc: product.desc
         }
 
-        fetch(`http://localhost:5000/addadvertise/${id}`, {
+        fetch(`https://assignment-12-server-silk.vercel.app/addadvertise/${id}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -80,7 +80,7 @@ const SellerProducts = () => {
         const proceed = true
         console.log(id);
         if (proceed) {
-            fetch(`http://localhost:5000/deleteadvertise/${id}`, {
+            fetch(`https://assignment-12-server-silk.vercel.app/deleteadvertise/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

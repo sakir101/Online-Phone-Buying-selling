@@ -11,7 +11,7 @@ const AddProducts = () => {
     const from = "/dashboard/allproductsmobile";
 
     useEffect(()=>{
-        fetch(`http://localhost:5000/alluser/${user?.email}`)
+        fetch(`https://assignment-12-server-silk.vercel.app/alluser/${user?.email}`)
         .then(res=> res.json())
         .then(data=> setUsername(data.name))
     },[user?.email])
@@ -48,7 +48,7 @@ const AddProducts = () => {
             sellerEmail: email,
             desc
         }
-        fetch('http://localhost:5000/addproduct', {
+        fetch('https://assignment-12-server-silk.vercel.app/addproduct', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

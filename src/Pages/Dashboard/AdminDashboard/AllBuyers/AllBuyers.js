@@ -7,7 +7,7 @@ const AllBuyers = () => {
     const { data: buyers = [], refetch, isLoading } = useQuery({
         queryKey: ['buyers'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/allbuyers',{
+            const res = await fetch('https://assignment-12-server-silk.vercel.app/allbuyers',{
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}` 
                  }
@@ -21,7 +21,7 @@ const AllBuyers = () => {
     const handleDelete = id => {
         const proceed = window.confirm(`Are you sure you want to delete`)
         if (proceed) {
-            fetch(`http://localhost:5000/deleteuser/${id}`, {
+            fetch(`https://assignment-12-server-silk.vercel.app/deleteuser/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

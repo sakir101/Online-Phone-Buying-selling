@@ -35,7 +35,7 @@ const router = createBrowserRouter([
             {
                 path: '/allproducts/:id',
                 element: <PrivateRoute><AllProducts></AllProducts></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/categoryone/${params.id}`)
+                loader: ({params}) => fetch(`https://assignment-12-server-silk.vercel.app/categoryone/${params.id}`)
             },
             {
                 path: '/usersignup',
@@ -53,7 +53,7 @@ const router = createBrowserRouter([
             {
                 path: '/payment/:id',
                 element: <Payment></Payment>,
-                loader: ({params}) => fetch(`http://localhost:5000/payment/${params.id}`)
+                loader: ({params}) => fetch(`https://assignment-12-server-silk.vercel.app/payment/${params.id}`)
             },
             {
                 path: '/fa',

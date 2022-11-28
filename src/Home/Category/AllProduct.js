@@ -9,7 +9,7 @@ const AllProduct = ({ product, setBookingProduct, setReportProduct }) => {
     const [verify, setVerify] = useState('');
 
     useEffect(() => {
-        fetch(`http://localhost:5000/checkverify/${product?.sellerEmail}`)
+        fetch(`https://assignment-12-server-silk.vercel.app/checkverify/${product?.sellerEmail}`)
             .then(res => res.json())
             .then(data => data.verify === 'verified' ? setVerify(data.verify) : setVerify(''))
     }, [product?.sellerEmail])

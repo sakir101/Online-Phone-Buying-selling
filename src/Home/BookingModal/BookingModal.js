@@ -23,7 +23,7 @@ const BookingModal = ({ bookingProduct, setBookingProduct}) => {
             meet,
             image: img
         }
-        fetch('http://localhost:5000/bookingphone', {
+        fetch('https://assignment-12-server-silk.vercel.app/bookingphone', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

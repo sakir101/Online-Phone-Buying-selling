@@ -15,7 +15,7 @@ const Products = () => {
     const [availableProducts, setAvailableProducts] = useState([])
     const { user } = useContext(AuthContext);
 
-    axios.get('http://localhost:5000/advertiseProduct',{
+    axios.get('https://assignment-12-server-silk.vercel.app/advertiseProduct',{
         headers: {
             authorization: `bearer ${localStorage.getItem('accessToken')}` 
          }

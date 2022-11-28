@@ -45,7 +45,7 @@ const UserSignup = () => {
             role: 'buyer'
         };
 
-        fetch('http://localhost:5000/mobileusers', {
+        fetch('https://assignment-12-server-silk.vercel.app/mobileusers', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

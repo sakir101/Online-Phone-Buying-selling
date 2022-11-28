@@ -7,7 +7,7 @@ const AllReport = () => {
     const { data: reports = [], refetch, isLoading } = useQuery({
         queryKey: ['reports'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/allreports',{
+            const res = await fetch('https://assignment-12-server-silk.vercel.app/allreports',{
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}` 
                  }
@@ -22,7 +22,7 @@ const AllReport = () => {
         console.log(id)
         const proceed = window.confirm(`Are you sure you want to delete`)
         if (proceed) {
-            fetch(`http://localhost:5000/deleteproducts/${id}`, {
+            fetch(`https://assignment-12-server-silk.vercel.app/deleteproducts/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -41,7 +41,7 @@ const AllReport = () => {
     const deleteReport = (idReport,id) =>{
         const proceed = window.confirm(`Are you sure you want to delete`)
         if (proceed) {
-        fetch(`http://localhost:5000/deletereport/${idReport}`, {
+        fetch(`https://assignment-12-server-silk.vercel.app/deletereport/${idReport}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -57,7 +57,7 @@ const AllReport = () => {
     const deleteReportAd = (id) =>{
         const proceed = true
         if (proceed) {
-        fetch(`http://localhost:5000/deleteReportAd/${id}`, {
+        fetch(`https://assignment-12-server-silk.vercel.app/deleteReportAd/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
