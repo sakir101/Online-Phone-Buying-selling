@@ -17,7 +17,8 @@ const Product = ({ product, setBookingProduct, setReportProduct }) => {
     }, [product?.sellerEmail])
 
     return (
-        <div className="card w-96 bg-base-100 shadow-xl">
+        <div>
+            <div className="card  bg-base-100 shadow-xl">
             <figure><img src={img} alt="phone" className='h-56' /></figure>
             <div className="card-body">
                 <div className='flex justify-between items-center'>
@@ -37,38 +38,11 @@ const Product = ({ product, setBookingProduct, setReportProduct }) => {
                 <p>Original Price: ${orgPrice}</p>
                 <p>Seller Name: {sellerName}</p>
 
-                <div className="card-actions justify-end">
-
-                    {
-                        user?.uid ?
-                            <label
-                                htmlFor="booking-modal"
-                                className="btn btn-primary"
-                                onClick={() => setBookingProduct(product)}
-                            >Book Now</label> :
-                            <Link to='/userlogin'> <label
-                                htmlFor="booking-modal"
-                                className="btn btn-primary"
-                                onClick={() => setBookingProduct(product)}
-                            >Book Now</label></Link>
-                    }
-                    {
-                        user?.uid ?
-                            <label
-                                htmlFor="report-modal"
-                                className="btn bg-red-700"
-                                onClick={() => setReportProduct(product)}
-                            >Report</label> :
-                            <Link to='/userlogin'><label
-                            htmlFor="report-modal"
-                            className="btn bg-red-700"
-                            onClick={() => setReportProduct(product)}
-                        >Report</label></Link>
-                    }
-
-                </div>
+                
             </div>
         </div>
+        </div>
+        
     );
 };
 

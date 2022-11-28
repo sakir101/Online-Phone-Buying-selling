@@ -11,6 +11,7 @@ import AllSellers from "../../Pages/Dashboard/AdminDashboard/AllSellers/AllSelle
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import AddProducts from "../../Pages/Dashboard/SellerDashboard/AddProducts/AddProducts";
 import SellerProducts from "../../Pages/Dashboard/SellerDashboard/AllProducts/SellerProducts";
+import Faq from "../../Pages/Faq/Faq";
 
 import Orders from "../../Pages/Orders/Orders";
 import Payment from "../../Pages/Payment/Payment";
@@ -19,6 +20,7 @@ import UserSignup from "../../Signup/UserSignup";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
+import routebg from '../../Asset/404routebg.png'
 
 const router = createBrowserRouter([
     {
@@ -54,6 +56,10 @@ const router = createBrowserRouter([
                 path: '/payment/:id',
                 element: <Payment></Payment>,
                 loader: ({params}) => fetch(`http://localhost:5000/payment/${params.id}`)
+            },
+            {
+                path: '/fa',
+                element: <div>404 Page Not Found! About is unable to reach</div>
             }
         ]
     },
@@ -87,7 +93,12 @@ const router = createBrowserRouter([
             },
             
         ]
-    }
+    },
+    {
+        path: '/fa',
+        element: <Faq></Faq>
+    },
+    { path: '*', element: <div className="w-full"><img src={routebg} alt="" className="mx-auto"/></div> }
 
 ])
 

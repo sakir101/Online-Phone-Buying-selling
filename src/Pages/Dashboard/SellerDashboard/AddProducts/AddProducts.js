@@ -1,10 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../../Contexts/AuthProvider';
 import toast, { Toaster } from 'react-hot-toast';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 
 const AddProducts = () => {
     const {user} = useContext(AuthContext);
     const [username, setUsername] = useState('')
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = "/dashboard/allproductsmobile";
 
     useEffect(()=>{
         fetch(`http://localhost:5000/alluser/${user?.email}`)
@@ -57,6 +61,7 @@ const AddProducts = () => {
                     toast('Product successfully placed');
                 }
                 form.reset();
+                navigate(from, {replace: true})
             })
             .catch(err => console.error(err));
     }

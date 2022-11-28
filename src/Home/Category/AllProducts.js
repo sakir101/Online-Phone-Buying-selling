@@ -31,7 +31,7 @@ const AllProducts = () => {
 
 
     return (
-        <div>
+        <div className='w-full p-5'>
             <div>
                 <h1 className='text-4xl font-bold text-center'>{name}</h1>
             </div>
@@ -47,7 +47,7 @@ const AllProducts = () => {
                 bookingProduct && <BookingModal
                  bookingProduct = {bookingProduct}
                  setBookingProduct={setBookingProduct}
-                 refetch={refetch}
+                 
                  ></BookingModal> 
                  
              }
@@ -56,7 +56,7 @@ const AllProducts = () => {
                 <ReportModal
                     reportProduct={reportProduct}
                     setReportProduct={setReportProduct}
-                    refetch={refetch}
+                    
                 ></ReportModal>
              }
         </div>

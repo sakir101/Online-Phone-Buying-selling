@@ -7,7 +7,11 @@ const AllReport = () => {
     const { data: reports = [], refetch, isLoading } = useQuery({
         queryKey: ['reports'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/allreports');
+            const res = await fetch('http://localhost:5000/allreports',{
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}` 
+                 }
+            });
             const data = await res.json();
             console.log(data)
             return data;
@@ -15,25 +19,45 @@ const AllReport = () => {
     });
 
     const handleDelete = (id, idReport) => {
+        console.log(id)
         const proceed = window.confirm(`Are you sure you want to delete`)
         if (proceed) {
-            fetch(`http://localhost:5000/deleteproduct/${id}`, {
+            fetch(`http://localhost:5000/deleteproducts/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
                 .then(data => {
                     if (data.deletedCount > 0) {
                         toast('Delete Product Successfully');
-                        deleteReport(idReport)
+                        deleteReport(idReport,id)
                     }
 
                 })
+                .catch(err=>console.log(err))
 
         }
     }
 
-    const deleteReport = idReport =>{
+    const deleteReport = (idReport,id) =>{
+        const proceed = window.confirm(`Are you sure you want to delete`)
+        if (proceed) {
         fetch(`http://localhost:5000/deletereport/${idReport}`, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        deleteReportAd(id)
+                    }
+
+                })
+            }
+    }
+
+    const deleteReportAd = (id) =>{
+        const proceed = true
+        if (proceed) {
+        fetch(`http://localhost:5000/deleteReportAd/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -43,6 +67,7 @@ const AllReport = () => {
                     }
 
                 })
+            }
     }
 
     if(isLoading){

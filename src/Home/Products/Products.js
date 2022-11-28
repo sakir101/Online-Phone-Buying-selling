@@ -15,7 +15,11 @@ const Products = () => {
     const [availableProducts, setAvailableProducts] = useState([])
     const { user } = useContext(AuthContext);
 
-    axios.get('http://localhost:5000/advertiseProduct')
+    axios.get('http://localhost:5000/advertiseProduct',{
+        headers: {
+            authorization: `bearer ${localStorage.getItem('accessToken')}` 
+         }
+    })
         .then(res => {
             console.log(res.data);
             setAvailableProducts(res.data)
@@ -28,10 +32,10 @@ const Products = () => {
         });
 
     return (
-        <div>
+        <div className='w-full p-5'>
             <div className='mt-16 text-center'>
-                <h3 className='text-xl font-bold text-cyan-800 uppercase'>Our Products</h3>
-                <h2 className='text-3xl'>Find Your Favorite One's</h2>
+                <h3 className='text-xl font-bold text-cyan-800 uppercase text-center'>Our Products</h3>
+                <h2 className='text-3xl text-center'>Find Your Favorite One's</h2>
             </div>
             <div className='grid gap-[34px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto my-7'>
                 {
@@ -40,21 +44,8 @@ const Products = () => {
                     <p className='text-red-600 font-bold text-center text-2xl'>No Advertise Product to show</p>
                 }
             </div>
-            {
-
-                bookingProduct && <BookingModal
-                    bookingProduct={bookingProduct}
-                    setBookingProduct={setBookingProduct}
-                ></BookingModal>
-
-            }
-            {
-                reportProduct &&
-                <ReportModal
-                    reportProduct={reportProduct}
-                    setReportProduct={setReportProduct}
-                ></ReportModal>
-            }
+           
+           
         </div>
 
     );
