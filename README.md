@@ -1,4 +1,4 @@
-# Mobile Hunter - A mobile buying and selling site
+# Mobile Hunter - Old mobile buying and selling site
 ## https://mobile-hunter-sakir123.web.app/
 
 ## Feature
