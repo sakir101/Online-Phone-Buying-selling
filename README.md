@@ -1,4 +1,6 @@
 ![mobile](https://github.com/user-attachments/assets/816fa0fa-a6a4-4775-af8e-7771fe83e015)
+![image](https://github.com/user-attachments/assets/10014171-47e2-4b2e-83bf-28fe281b2840)
+![image](https://github.com/user-attachments/assets/6ff1a8fe-63f7-4238-90e3-4a8074b04a38)
 
 
 # Mobile Hunter - Old mobile buying and selling site
