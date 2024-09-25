@@ -1,63 +1,131 @@
-import React from 'react';
+import React, { useState } from "react";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const Blog = () => {
-    return (
-        <div className='my-5'>
-            <div>
-                <h3 className='text-2xl font-bold'>1. What are the different ways to manage a state in a React application?</h3>
-                <p>The Four Kinds of React State to Manage
-                    <br />
-                    Local (UI) state - Local state is data we manage in one or another component.
-                    <br />
-                    Global (UI) state - Global state is data we manage across multiple components.
-                    <br />
-                    Server state - Data that comes from an external server that must be integrated with our UI state.
-                    <br />
-                    URL state - Data that exists on our URLs, including the pathname and query parameters.
-                </p>
-            </div>
-            <br />
-            <div>
-                <h3 className='text-2xl font-bold'>
-                    2. How does prototypical inheritance work?
-                </h3>
-                <p>
-                    The Prototypal Inheritance is a feature in javascript used to add methods and properties in objects. It is a method by which an object can inherit the properties and methods of another object. Traditionally, in order to get and set the [[Prototype]] of an object, we use Object. getPrototypeOf and Object.
-                </p>
-            </div>
-            <br />
-            <div>
-                <h3 className='text-2xl font-bold'>
-                    3. What is a unit test? Why should we write unit tests?
-                </h3>
-                <p>The main objective of unit testing is to isolate written code to test and determine if it works as intended. Unit testing is an important step in the development process, because if done correctly, it can help detect early flaws in code which may be more difficult to find in later testing stages.</p>
-            </div>
-            <br />
-            <div>
-                <h3 className='text-2xl font-bold'>
-                4. React vs. Angular vs. Vue?
-                </h3>
-                <p>
-                    <strong>React</strong>
-                    <br />
-                    React doesn't enforce a specific project structure, and as you can see from the official “Hello World” example below, you can start using React with just a few lines of code.
-                    React can be used as a UI library to render elements, without enforcing a specific project structure, and that's why it's not strictly a framework.
-                    <br />
-                    <strong>Vue </strong>
-                    <br />
-                    The Vue.js core library focuses on the View layer only. It's called a progressive framework because you can extend its functionality with official and third-party packages, such as Vue Router or Vuex, to turn it into an actual framework.
-                    Although Vue is not strictly associated with the MVVM (Model-View-ViewModel) pattern, its design was partly inspired by it. With Vue, you'll be working mostly on the ViewModel layer, to make sure that the application data is processed in a way that allows the framework to render an up-to-date View.
-                    <br />
-                    <strong>Angular</strong>
-                    <br />
-                    In this article, I’m discussing Angular 2, and not the first version of the framework which is now known as AngularJS.
+  const [activeIndex, setActiveIndex] = useState(null);
 
-                    AngularJS, the original framework, is an MVC (Model-View-Controller) framework. But in Angular 2, there’s no strict association with MV*-patterns as it is also component-based.
-                </p>
-            </div>
+  const toggleAccordion = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
 
+  return (
+    <div className="my-8 p-6 max-w-3xl mx-auto bg-white rounded-lg shadow-md">
+      {/* Question 1 */}
+      <div className="border-b border-gray-300 pb-4">
+        <div
+          className="flex items-center justify-between cursor-pointer"
+          onClick={() => toggleAccordion(0)}
+        >
+          <h3
+            className={`text-xl font-semibold transition-colors duration-200 ${
+              activeIndex === 0 ? "text-blue-600" : "text-gray-800"
+            }`}
+          >
+            1.How do I sell my phone on this website?
+          </h3>
+          <ExpandMoreIcon
+            className={`transition-transform duration-200 ${
+              activeIndex === 0 ? "rotate-180" : ""
+            }`}
+          />
         </div>
-    );
+        {activeIndex === 0 && (
+          <p className="mt-3 text-gray-700">
+            To sell your phone, simply create an account, list your phone by
+            providing the necessary details such as the model, condition, price,
+            and photos, and post the listing. Interested buyers can then contact
+            you through the platform, and you can arrange the sale.
+          </p>
+        )}
+      </div>
+
+      {/* Question 2 */}
+      <div className="border-b border-gray-300 py-4">
+        <div
+          className="flex items-center justify-between cursor-pointer"
+          onClick={() => toggleAccordion(1)}
+        >
+          <h3
+            className={`text-xl font-semibold transition-colors duration-200 ${
+              activeIndex === 1 ? "text-blue-600" : "text-gray-800"
+            }`}
+          >
+            2. How can I be sure the phone I’m buying is in good condition?
+          </h3>
+          <ExpandMoreIcon
+            className={`transition-transform duration-200 ${
+              activeIndex === 1 ? "rotate-180" : ""
+            }`}
+          />
+        </div>
+        {activeIndex === 1 && (
+          <p className="mt-3 text-gray-700">
+            Each seller is required to provide detailed information about the
+            phone's condition, including any damages or issues. We encourage
+            buyers to ask the seller for additional photos or to inspect the
+            device in person before completing the purchase. You can also check
+            the reviews of the seller for added confidence.
+          </p>
+        )}
+      </div>
+
+      {/* Question 3 */}
+      <div className="border-b border-gray-300 py-4">
+        <div
+          className="flex items-center justify-between cursor-pointer"
+          onClick={() => toggleAccordion(2)}
+        >
+          <h3
+            className={`text-xl font-semibold transition-colors duration-200 ${
+              activeIndex === 2 ? "text-blue-600" : "text-gray-800"
+            }`}
+          >
+            3. What payment methods are supported?
+          </h3>
+          <ExpandMoreIcon
+            className={`transition-transform duration-200 ${
+              activeIndex === 2 ? "rotate-180" : ""
+            }`}
+          />
+        </div>
+        {activeIndex === 2 && (
+          <p className="mt-3 text-gray-700">
+            We support secure payment methods, stripe.The available payment
+            options will be displayed when you check out.
+          </p>
+        )}
+      </div>
+
+      {/* Question 4 */}
+      <div className="py-4">
+        <div
+          className="flex items-center justify-between cursor-pointer"
+          onClick={() => toggleAccordion(3)}
+        >
+          <h3
+            className={`text-xl font-semibold transition-colors duration-200 ${
+              activeIndex === 3 ? "text-blue-600" : "text-gray-800"
+            }`}
+          >
+            4. Can I return the phone if it’s not as described?
+          </h3>
+          <ExpandMoreIcon
+            className={`transition-transform duration-200 ${
+              activeIndex === 3 ? "rotate-180" : ""
+            }`}
+          />
+        </div>
+        {activeIndex === 3 && (
+          <p className="mt-3 text-gray-700">
+            Yes, if the phone you receive is not as described or is defective,
+            you can initiate a return or refund within the stipulated period. Be
+            sure to read the return policy on the product page before
+            purchasing.
+          </p>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default Blog;
