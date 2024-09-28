@@ -7,7 +7,7 @@
 # Mobile Hunter - Old mobile buying and selling site
 ### https://mobile-hunter-sakir123.web.app/
 
-# Server Site: https://github.com/sakir101/online-phone-buying-selling-server
+### Server Site: https://github.com/sakir101/online-phone-buying-selling-server
 
 **Feature**
 * A seller, buyer and and admin based dashboard project
